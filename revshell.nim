@@ -16,8 +16,5 @@ while true:
     let cmd = sock.recvLine()
     if cmd == "exit":
         break
-    try:
-        let result = execProcess(cmd)
-    except:
-        let result = exeProcess("cmd /c " & cmd)
+    let result = execProcess("cmd /c " & cmd)
     sock.send(result)
